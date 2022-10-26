@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  postdb:
+    image: postgres
+    container_name: postgresdb
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=cosw
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234di
+  app:
+    container_name: spring-application
+    image: openjdk:17-jdk
+    build:
+      context: .
+      dockerfile: ./swServer/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postdb:5432/cosw
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - postdb
+    links:
+      - postdb
