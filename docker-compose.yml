@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: ./swServer/Dockerfile
     ports:
-      - "5000:8080"
+      - "1200:8080"
     environment:
       SPRING_DATASOURCE_URL : jdbc:postgresql://postdb:5432/cosw
       SPRING_DATASOURCE_USERNAME : postgres
