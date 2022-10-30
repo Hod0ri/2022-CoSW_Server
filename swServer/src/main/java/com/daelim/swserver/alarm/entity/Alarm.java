@@ -27,11 +27,11 @@ public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALARM_SEQ_GENERATOR")
     private String alarmId;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private LocalDateTime startTime;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private int days;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private boolean isRepeat;
 
     @ManyToOne
