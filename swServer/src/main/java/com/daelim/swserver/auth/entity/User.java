@@ -13,10 +13,10 @@ import javax.persistence.*;
 public class User {
     @Id
     private String userId;
-    @Column(length =10, nullable = false)
+    @Column(length =10, nullable = false, columnDefinition = "TEXT")
     private String userName;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String userPassword;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String email;
 }
