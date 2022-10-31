@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("alarm")
-public class UserAlarm {
+public class AlarmController {
 
 }

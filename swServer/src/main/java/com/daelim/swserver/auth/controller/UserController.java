@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
@@ -51,7 +53,8 @@ public class UserController {
 
     @GetMapping("signup")
     public String signup(@RequestParam(value = "id") String userId,
-                         @RequestParam(value = "password") String password) throws NoSuchAlgorithmException{
+                         @RequestParam(value = "password") String password,
+                         HttpServletResponse servletResponse) throws NoSuchAlgorithmException{
         JsonObject response = new JsonObject();
         String crypto = sha256.encrypt(password);
 
@@ -69,6 +72,8 @@ public class UserController {
             response.addProperty("message", "NoAccount");
         }
 
+        Cookie idcookie = new Cookie("useid", userId);
+        servletResponse.addCookie(idcookie);
         return response.toString();
     }
 
@@ -84,6 +89,30 @@ public class UserController {
         }
 
         return response.toString();
+    }
+
+    @GetMapping("check")
+    public String check(@CookieValue(name = "userid", required = false) String userId) {
+        JsonObject response = new JsonObject();
+        if(userId == null) {
+            response.addProperty("success", "false");
+        } else {
+            response.addProperty("success", "true");
+        }
+
+        return response.toString();
+    }
+
+    @GetMapping("logout")
+    public String logout(HttpServletResponse response) {
+        JsonObject json = new JsonObject();
+
+        Cookie cookie = new Cookie("userid", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        json.addProperty("success", "true");
+        return json.toString();
     }
 
 

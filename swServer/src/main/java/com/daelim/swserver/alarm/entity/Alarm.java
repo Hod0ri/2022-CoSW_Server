@@ -26,7 +26,7 @@ public class Alarm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALARM_SEQ_GENERATOR")
-    private String alarmId;
+    private Integer alarmId;
     @Column(nullable = false)
     private LocalDateTime startTime;
     @Column(nullable = false)
