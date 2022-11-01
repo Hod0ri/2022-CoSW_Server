@@ -34,8 +34,8 @@ public class Alarm {
     @Column(nullable = false)
     private boolean isRepeat;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private User user;
+    //ManyToOne
+    //@JoinColumn(name = "USER_ID")
+    //private User user;
 
 }
