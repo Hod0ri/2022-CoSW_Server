@@ -1,6 +1,7 @@
 package com.daelim.swserver.alarm.dto;
 
 import com.daelim.swserver.alarm.entity.Alarm;
+import com.daelim.swserver.mg.Days;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -10,20 +11,19 @@ import java.util.UUID;
 public class AlarmDTO {
     private LocalDateTime startTime;
 
-    private int days;
+    private Days days;
 
     private boolean isRepeat;
 
     public Alarm toEntity() {
         String uuid = UUID.randomUUID().toString();
-        Alarm alarm = Alarm.builder()
+
+        return Alarm.builder()
                 .alarmId(uuid)
                 .startTime(startTime)
                 .days(days)
                 .isRepeat(isRepeat)
                 .build();
-
-        return alarm;
     }
 
 }
