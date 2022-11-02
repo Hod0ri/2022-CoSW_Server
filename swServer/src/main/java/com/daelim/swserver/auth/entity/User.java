@@ -18,5 +18,7 @@ public class User {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String userPassword;
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String email;
+    private String useremail;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String userdeviceId;
 }
