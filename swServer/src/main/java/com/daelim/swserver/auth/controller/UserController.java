@@ -72,7 +72,7 @@ public class UserController {
             response.addProperty("message", "NoAccount");
         }
 
-        Cookie idcookie = new Cookie("useid", userId);
+        Cookie idcookie = new Cookie("userid", userId);
         servletResponse.addCookie(idcookie);
         return response.toString();
     }
@@ -98,6 +98,7 @@ public class UserController {
             response.addProperty("success", "false");
         } else {
             response.addProperty("success", "true");
+            response.addProperty("userID", userId);
         }
 
         return response.toString();
