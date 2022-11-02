@@ -28,7 +28,7 @@ public class SwaggerConfig {
                 .consumes(getConsumeContentTypes())
                 .produces(getProduceContentTypes())
                 .apiInfo(swaggerInfo()).select()
-                .apis(RequestHandlerSelectors.basePackage("com.nahwasa.iot.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.daelim.swserver.alarm.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false);
