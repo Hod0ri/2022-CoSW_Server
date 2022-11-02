@@ -49,8 +49,6 @@ public class UserController {
         Optional<User> tempUser = userRepository.findById(userdto.getUserId());
         userdto.setUserPassword(sha256.encrypt(userdto.getUserPassword()));
 
-        log.info("Request : " + userdto);
-
         // Check Duplicate User
         if(tempUser.isPresent()) {
             response.addProperty("success", "failed");
@@ -60,6 +58,7 @@ public class UserController {
 
         User user = userdto.toEntity();
         try {
+            log.info("User Register : " + user.getUserId());
             User saveUser = userRepository.save(user);
             response.addProperty("success", "true");
         } catch (Exception e) {
@@ -90,6 +89,7 @@ public class UserController {
         if (user.isPresent()) {
             if(crypto.equals(user.get().getUserPassword())) {
                 response.addProperty("success", "true");
+                log.info("User Login : " + user.get().getUserId());
             } else {
                 response.addProperty("success", "failed");
                 response.addProperty("message", "Auth");
@@ -113,6 +113,7 @@ public class UserController {
         JsonObject response = new JsonObject();
         try {
             userRepository.deleteById(userId);
+            log.info("User Deleted : " + userId);
             response.addProperty("success", "true");
         } catch(Exception e) {
             response.addProperty("success", "failed");
