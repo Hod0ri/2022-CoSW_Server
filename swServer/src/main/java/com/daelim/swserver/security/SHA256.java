@@ -9,12 +9,15 @@ public class SHA256 {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(payload.getBytes());
 
-        return BytotoHex(md.digest());
+        return ByteToHex(md.digest());
     }
 
-    public String BytotoHex(byte[] bytes) {
+    public String ByteToHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {sb.append(String.format("%02x", b));}
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
         return sb.toString();
     }
+
 }

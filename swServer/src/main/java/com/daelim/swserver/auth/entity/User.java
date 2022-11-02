@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @Id
     private String userId;
     @Column(length =10, nullable = false, columnDefinition = "TEXT")
@@ -18,7 +19,8 @@ public class User {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String userPassword;
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String useremail;
+    private String userEmail;
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String userdeviceId;
+    private String userDeviceId;
+
 }

@@ -18,10 +18,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("auth")
 public class UserController {
-    @Autowired
+
     private UserRepository userRepository;
 
-    SHA256 sha256 = new SHA256();
+    private final SHA256 sha256 = new SHA256();
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("signin")
     @ResponseBody
@@ -30,7 +35,7 @@ public class UserController {
         Optional<User> tempUser = userRepository.findById(userdto.getUserId());
         userdto.setUserPassword(sha256.encrypt(userdto.getUserPassword()));
 
-        log.info("Request : " + userdto.toString());
+        log.info("Request : " + userdto);
 
         // Check Duplicate User
         if(tempUser.isPresent()) {
@@ -72,8 +77,8 @@ public class UserController {
             response.addProperty("message", "NoAccount");
         }
 
-        Cookie idcookie = new Cookie("userid", userId);
-        servletResponse.addCookie(idcookie);
+        Cookie idCookie = new Cookie("userid", userId);
+        servletResponse.addCookie(idCookie);
         return response.toString();
     }
 
@@ -115,6 +120,5 @@ public class UserController {
         json.addProperty("success", "true");
         return json.toString();
     }
-
 
 }
