@@ -6,10 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AlarmRepository extends JpaRepository<Alarm, Integer> {
-<<<<<<< HEAD
-    boolean findByuserId(Integer userId);
-=======
+public interface AlarmRepository extends JpaRepository<Alarm, String> {
+
+    boolean findByuserId(String userId);
     List<Alarm> findAllByUser(User user);
->>>>>>> develop
 }

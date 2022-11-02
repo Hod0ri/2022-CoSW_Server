@@ -1,5 +1,6 @@
 package com.daelim.swserver.alarm.entity;
 
+import com.daelim.swserver.mg.Days;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class Alarm {
     @Column(nullable = false)
     private LocalDateTime startTime;
     @Column(nullable = false)
-    private int days;
+    private Days days;
     @Column(nullable = false)
     private boolean isRepeat;
 
