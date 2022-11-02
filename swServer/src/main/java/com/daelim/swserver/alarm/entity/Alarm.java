@@ -16,17 +16,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(
-        name = "ALARM_SEQ_GENERATOR",
-        sequenceName = "ALARM_SEQ",
-        initialValue = 1,
-        allocationSize = 1
-)
 public class Alarm {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALARM_SEQ_GENERATOR")
-    private Integer alarmId;
+    private String alarmId;
     @Column(nullable = false)
     private LocalDateTime startTime;
     @Column(nullable = false)
