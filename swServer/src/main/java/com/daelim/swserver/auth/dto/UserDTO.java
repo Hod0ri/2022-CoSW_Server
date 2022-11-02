@@ -9,14 +9,16 @@ public class UserDTO {
     private String userId;
     private String userName;
     private String userPassword;
-    private String email;
+    private String useremail;
+    private String userdeviceId;
 
     public User toEntity() {
         return User.builder()
                 .userId(userId)
                 .userPassword(userPassword)
                 .userName(userName)
-                .email(email)
+                .useremail(useremail)
+                .userdeviceId(userdeviceId)
                 .build();
     }
 }
