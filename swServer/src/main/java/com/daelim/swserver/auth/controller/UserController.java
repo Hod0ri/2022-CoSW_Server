@@ -24,12 +24,12 @@ import java.util.Optional;
 @RequestMapping("auth")
 public class UserController {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     private final SHA256 sha256 = new SHA256();
 
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
