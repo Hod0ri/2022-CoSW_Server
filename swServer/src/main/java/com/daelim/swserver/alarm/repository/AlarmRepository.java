@@ -9,5 +9,7 @@ import java.util.List;
 public interface AlarmRepository extends JpaRepository<Alarm, String> {
 
     boolean findByuserId(String userId);
+
     List<Alarm> findAllByUser(User user);
+
 }
