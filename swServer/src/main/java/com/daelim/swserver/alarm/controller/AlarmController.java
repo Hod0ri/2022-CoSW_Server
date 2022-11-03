@@ -5,14 +5,21 @@ import com.daelim.swserver.alarm.entity.Alarm;
 import com.daelim.swserver.alarm.repository.AlarmRepository;
 import com.daelim.swserver.auth.entity.User;
 import com.daelim.swserver.auth.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.gson.JsonObject;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +36,19 @@ public class AlarmController {
             description = "알람 전체 조회"
     )
     @GetMapping("search")
-    public String getAlarm(@CookieValue(name = "userid") String userid) {
-        JsonObject response = new JsonObject();
+    public String getAlarm(
+            // @CookieValue(name = "userid") String userid
+    ) throws JsonProcessingException {
 
-        Optional<User> user = userRepository.findById(userid);
+        // Optional<User> user = userRepository.findById(userid);
 
         List<Alarm> alarms =  alarmRepository.findAll();
 
-        return response.toString();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        return mapper.writeValueAsString(alarms);
 
     }
 
@@ -47,8 +59,9 @@ public class AlarmController {
     @PostMapping("insert")
     public String insertAlarm(@RequestBody AlarmDTO alarmDTO) {
         JsonObject response = new JsonObject();
-
+        log.info(alarmDTO.toString());
         Alarm alarm = alarmDTO.toEntity();
+        log.info(alarm.toString());
 
         try{
             Alarm saveAlarm = alarmRepository.save(alarm);
