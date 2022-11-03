@@ -5,11 +5,10 @@ import com.daelim.swserver.auth.entity.User;
 import com.daelim.swserver.auth.repository.UserRepository;
 import com.daelim.swserver.security.SHA256;
 import com.google.gson.JsonObject;
-import io.swagger.annotations.ApiOperation;
+
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
