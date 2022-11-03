@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk
 VOLUME /tmp
-ARG JAR_FILE=./swServer/build/libs/*.jar
+ARG JAR_FILE=./build/libs/*.jar
 EXPOSE 8080
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar", "-Duser.timezone=Asia/Seoul" ,"/app.jar"]
@@ -12,7 +12,7 @@ ENTRYPOINT ["java","-jar", "-Duser.timezone=Asia/Seoul" ,"/app.jar"]
 #COPY gradle gradle
 #COPY build.gradle .
 #COPY settings.gradle .
-#COPY src src
+#COPY ./src ./src
 #
 #RUN chmod +x ./gradlew
 #RUN ./gradlew bootJar
