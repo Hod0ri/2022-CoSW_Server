@@ -8,6 +8,7 @@ import com.daelim.swserver.auth.repository.UserRepository;
 import com.google.gson.JsonObject;
 
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,23 +16,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
-
-
-@Component
 @Slf4j
 @RestController
 @RequestMapping("alarm")
+@RequiredArgsConstructor
 public class AlarmController {
-    private AlarmRepository alarmRepository;
-    private UserRepository userRepository;
-
-    @Autowired
-    public AlarmController(AlarmRepository alarmRepository, UserRepository userRepository){
-        this.alarmRepository = alarmRepository;
-        this.userRepository = userRepository;
-    }
-
+    private final AlarmRepository alarmRepository;
+    private final UserRepository userRepository;
 
     @Operation(
             summary = "알람 조회",
