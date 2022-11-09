@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class UserDTO {
-    @ApiModelProperty(value = "사용자 ID")
 
+    @ApiModelProperty(value = "사용자 ID")
     private String userId;
     @ApiModelProperty(value = "사용자 닉네임")
     private String userName;

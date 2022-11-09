@@ -18,8 +18,10 @@ import java.util.Set;
 public class SwaggerConfig {
 
     private ApiInfo swaggerInfo() {
-        return new ApiInfoBuilder().title("일어나서 걸어가요")
-                .description("일어나서 걸어가요 API Docs").build();
+        return new ApiInfoBuilder()
+                .title("일어나서 걸어가요")
+                .description("일어나서 걸어가요 API Docs")
+                .build();
     }
 
     @Bean
@@ -46,4 +48,5 @@ public class SwaggerConfig {
         produces.add("application/json;charset=UTF-8");
         return produces;
     }
+
 }
