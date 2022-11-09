@@ -5,7 +5,6 @@ import com.daelim.swserver.auth.entity.User;
 import com.daelim.swserver.auth.repository.UserRepository;
 import com.daelim.swserver.security.SHA256;
 import com.google.gson.JsonObject;
-
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,10 +22,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("auth")
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
 
-    SHA256 sha256 = new SHA256();
+    private final UserRepository userRepository;
+
+    private final SHA256 sha256 = new SHA256();
+
+    @Autowired
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Operation(
             summary = "사용자 회원가입",
@@ -44,7 +48,7 @@ public class UserController {
         userdto.setUserPassword(sha256.encrypt(userdto.getUserPassword()));
 
         // Check Duplicate User
-        if(tempUser.isPresent()) {
+        if (tempUser.isPresent()) {
             response.addProperty("success", "failed");
             response.addProperty("message", "Duplicate user");
             return response.toString();
@@ -74,14 +78,14 @@ public class UserController {
     @GetMapping("signup")
     public String signup(@RequestParam(value = "id") String userId,
                          @RequestParam(value = "password") String password,
-                         HttpServletResponse servletResponse) throws NoSuchAlgorithmException{
+                         HttpServletResponse servletResponse) throws NoSuchAlgorithmException {
         JsonObject response = new JsonObject();
         String crypto = sha256.encrypt(password);
 
         Optional<User> user = userRepository.findById(userId);
 
         if (user.isPresent()) {
-            if(crypto.equals(user.get().getUserPassword())) {
+            if (crypto.equals(user.get().getUserPassword())) {
                 response.addProperty("success", "true");
                 log.info("User Login : " + user.get().getUserId());
             } else {
@@ -93,8 +97,8 @@ public class UserController {
             response.addProperty("message", "NoAccount");
         }
 
-        Cookie idcookie = new Cookie("userid", userId);
-        servletResponse.addCookie(idcookie);
+        Cookie idCookie = new Cookie("userid", userId);
+        servletResponse.addCookie(idCookie);
         return response.toString();
     }
 
@@ -109,7 +113,7 @@ public class UserController {
             userRepository.deleteById(userId);
             log.info("User Deleted : " + userId);
             response.addProperty("success", "true");
-        } catch(Exception e) {
+        } catch (Exception e) {
             response.addProperty("success", "failed");
             response.addProperty("message", e.getMessage());
         }
@@ -121,7 +125,7 @@ public class UserController {
     @GetMapping("check")
     public String check(@CookieValue(name = "userid", required = false) String userId) {
         JsonObject response = new JsonObject();
-        if(userId == null) {
+        if (userId == null) {
             response.addProperty("success", "false");
         } else {
             response.addProperty("success", "true");
@@ -130,6 +134,7 @@ public class UserController {
 
         return response.toString();
     }
+
     @Operation(
             summary = "로그아웃",
             description = "로그아웃 성공여부 상태 리턴 (success true/failed)"
@@ -145,6 +150,5 @@ public class UserController {
         json.addProperty("success", "true");
         return json.toString();
     }
-
 
 }

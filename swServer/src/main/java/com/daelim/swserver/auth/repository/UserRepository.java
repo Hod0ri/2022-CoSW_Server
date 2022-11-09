@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-    boolean countByuserId(String userId);
+
+    boolean countByUserId(String userId);
+
 }

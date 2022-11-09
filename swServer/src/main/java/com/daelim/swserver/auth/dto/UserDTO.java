@@ -4,9 +4,9 @@ import com.daelim.swserver.auth.entity.User;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-
 @Data
 public class UserDTO {
+
     @ApiModelProperty(value = "사용자 ID")
     private String userId;
     @ApiModelProperty(value = "사용자 닉네임")
@@ -14,17 +14,18 @@ public class UserDTO {
     @ApiModelProperty(value = "사용자 비밀번호")
     private String userPassword;
     @ApiModelProperty(value = "사용자 이메일")
-    private String useremail;
+    private String userEmail;
     @ApiModelProperty(value = "사용자 NFC UID")
-    private String userdeviceId;
+    private String userDeviceId;
 
     public User toEntity() {
         return User.builder()
                 .userId(userId)
                 .userPassword(userPassword)
                 .userName(userName)
-                .useremail(useremail)
-                .userdeviceId(userdeviceId)
+                .userEmail(userEmail)
+                .userDeviceId(userDeviceId)
                 .build();
     }
+
 }

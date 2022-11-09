@@ -1,21 +1,21 @@
 package com.daelim.swserver.alarm.entity;
 
 import com.daelim.swserver.mg.Days;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_alarm")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Alarm {
 
@@ -29,8 +29,17 @@ public class Alarm {
     @Column(nullable = false)
     private boolean isRepeat;
 
-    //ManyToOne
-    //@JoinColumn(name = "USER_ID")
-    //private User user;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Alarm alarm = (Alarm) o;
+        return alarmId != null && Objects.equals(alarmId, alarm.alarmId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
 }
