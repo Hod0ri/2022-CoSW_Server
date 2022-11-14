@@ -1,5 +1,6 @@
 package com.daelim.swserver.alarm.entity;
 
+import com.daelim.swserver.alarm.dto.AlarmDTO;
 import com.daelim.swserver.mg.Days;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -28,6 +29,16 @@ public class Alarm {
     private Days days;
     @Column(nullable = false)
     private boolean isRepeat;
+
+    public AlarmDTO toDto() {
+        AlarmDTO dto = new AlarmDTO();
+        dto.setAlarmId(alarmId);
+        dto.setStartTime(startTime);
+        dto.setDays(days);
+        dto.setRepeat(isRepeat);
+
+        return dto;
+    }
 
     @Override
     public boolean equals(Object o) {
