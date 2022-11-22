@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,7 +27,8 @@ public class Alarm {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime startTime;
     @Column(nullable = false)
-    private Days days;
+    @ElementCollection
+    private List<Days> days;
     @Column(nullable = false)
     private boolean isRepeat;
 

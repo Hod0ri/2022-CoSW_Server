@@ -1,0 +1,36 @@
+INFO  22-11-09 11:41:04[restartedMain] [SwServerApplication:55] - Starting SwServerApplication using Java 19.0.1 on DESKTOP-5LQ2S29 with PID 13528 (C:\Users\Owner\Desktop\2022-CoSW_Server\swServer\build\classes\java\main started by Owner in C:\Users\Owner\Desktop\2022-CoSW_Server)
+INFO  22-11-09 11:41:04[restartedMain] [SwServerApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  22-11-09 11:41:04[restartedMain] [DevToolsPropertyDefaultsPostProcessor:255] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  22-11-09 11:41:04[restartedMain] [DevToolsPropertyDefaultsPostProcessor:255] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  22-11-09 11:41:04[restartedMain] [RepositoryConfigurationDelegate:132] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  22-11-09 11:41:04[restartedMain] [RepositoryConfigurationDelegate:201] - Finished Spring Data repository scanning in 29 ms. Found 2 JPA repository interfaces.
+INFO  22-11-09 11:41:05[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  22-11-09 11:41:05[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-8080"]
+INFO  22-11-09 11:41:05[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  22-11-09 11:41:05[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/9.0.68]
+INFO  22-11-09 11:41:05[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  22-11-09 11:41:05[restartedMain] [ServletWebServerApplicationContext:292] - Root WebApplicationContext: initialization completed in 1127 ms
+WARN  22-11-09 11:41:05[restartedMain] [AnnotationConfigServletWebServerApplicationContext:591] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Unsatisfied dependency expressed through method 'dataSourceScriptDatabaseInitializer' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanCreationException: Failed to determine a suitable driver class
+INFO  22-11-09 11:41:05[restartedMain] [StandardService:173] - Stopping service [Tomcat]
+INFO  22-11-09 11:41:05[restartedMain] [ConditionEvaluationReportLoggingListener:136] - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ERROR 22-11-09 11:41:05[restartedMain] [LoggingFailureAnalysisReporter:40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+

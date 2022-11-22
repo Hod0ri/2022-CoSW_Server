@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -20,7 +21,7 @@ public class AlarmDTO {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime startTime;
     @ApiModelProperty(value = "알람 설정요일")
-    private Days days;
+    private List<Days> days;
     @ApiModelProperty(value = "알람 반복여부")
     private boolean isRepeat;
 
